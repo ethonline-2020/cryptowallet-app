@@ -1,6 +1,9 @@
+import 'package:cryptowallet/appbars/appbar.dart';
 import 'package:cryptowallet/configs/colors.dart';
 import 'package:cryptowallet/configs/dimensions.dart';
+import 'package:cryptowallet/configs/navigation.dart';
 import 'package:cryptowallet/configs/strings.dart';
+import 'package:cryptowallet/pages/profilepage/profilepage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -10,6 +13,8 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     double height = getheight(context);
@@ -18,14 +23,8 @@ class _DashboardPageState extends State<DashboardPage> {
       return size * width / 414;
     }
 
-    var _scaffoldKey = new GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
-      drawer: Drawer(
-        child: Container(
-          width: width / 2,
-        ),
-      ),
       body: Container(
         color: darkblue,
         child: Stack(
@@ -36,37 +35,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: Container(
                   height: height / 3,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              alignment: Alignment.centerLeft,
-                              child: IconButton(
-                                onPressed: () {
-                                  _scaffoldKey.currentState.openDrawer();
-                                },
-                                icon: Icon(
-                                  FontAwesomeIcons.bars,
-                                  color: white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                              "CryptoWallet",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: white, fontSize: fontSize(25)),
-                            ),
-                          ),
-                          Expanded(child: Container()),
-                        ],
-                      ),
                       Container(
                         padding: EdgeInsets.only(top: height / 40),
                         child: Column(
@@ -212,7 +183,14 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                     ],
                   )),
-            )
+            ),
+            CustomAppBar(
+              title: "CryptoWallet",
+              icon: FontAwesomeIcons.userAlt,
+              onPressed: () {
+                navigate(context, ProfilePage());
+              },
+            ),
           ],
         ),
       ),

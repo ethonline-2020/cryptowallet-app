@@ -8,6 +8,8 @@ class ScrollLockPage extends StatefulWidget {
 class _ScrollLockPageState extends State<ScrollLockPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Container(),
+    );
   }
 }
