@@ -20,7 +20,8 @@ class ListOption extends StatelessWidget {
       child: Container(
         color: Colors.transparent,
         width: width,
-        padding: EdgeInsets.symmetric(horizontal: width / 15),
+        padding:
+            EdgeInsets.symmetric(horizontal: width / 15, vertical: height / 60),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,7 +29,7 @@ class ListOption extends StatelessWidget {
             Text(
               leading,
               textAlign: TextAlign.left,
-              style: TextStyle(color: white, fontSize: fontSize(25)),
+              style: TextStyle(color: white, fontSize: fontSize(20)),
             ),
             Container(alignment: Alignment.centerRight, child: trailing),
           ],

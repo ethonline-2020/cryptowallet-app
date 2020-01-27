@@ -3,6 +3,8 @@ import 'package:cryptowallet/components/profilepage/listoption.dart';
 import 'package:cryptowallet/components/profilepage/userprofile.dart';
 import 'package:cryptowallet/configs/colors.dart';
 import 'package:cryptowallet/configs/dimensions.dart';
+import 'package:cryptowallet/configs/navigation.dart';
+import 'package:cryptowallet/pages/screenlock/screenlock.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,11 +16,15 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   bool _isDark = true;
-
+  bool _lock = false;
   @override
   Widget build(BuildContext context) {
     double height = getheight(context);
     double width = getwidth(context);
+    double fontSize(double size) {
+      return size * width / 414;
+    }
+
     return Scaffold(
       backgroundColor: darkblue,
       body: Container(
@@ -32,6 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Expanded(
               child: Container(
                 child: ListView(
+                  physics: BouncingScrollPhysics(),
                   children: <Widget>[
                     UserProfile(
                       width: width,
@@ -46,7 +53,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: width,
                       leading: "Dark Mode",
                       onPressed: () {
-                        print("hello");
                         setState(() {
                           _isDark = !_isDark;
                         });
@@ -59,7 +65,71 @@ class _ProfilePageState extends State<ProfilePage> {
                           });
                         },
                       ),
-                    )
+                    ),
+                    Container(
+                      height: .3,
+                      color: white.withOpacity(.5),
+                      margin: EdgeInsets.symmetric(horizontal: width / 15),
+                    ),
+                    ListOption(
+                      height: height,
+                      width: width,
+                      leading: "Pin Code Lock",
+                      onPressed: () {
+                        navigate(context, ScreenLockPage());
+                        setState(() {
+                          _lock = !_lock;
+                        });
+                      },
+                      trailing: CupertinoSwitch(
+                        value: _lock,
+                        onChanged: (bool value) {
+                          setState(() {
+                            _lock = !_lock;
+                          });
+                        },
+                      ),
+                    ),
+                    Container(
+                      height: .3,
+                      color: white.withOpacity(.5),
+                      margin: EdgeInsets.symmetric(horizontal: width / 15),
+                    ),
+                    ListOption(
+                      height: height,
+                      width: width,
+                      leading: "Base Currency",
+                      onPressed: () {},
+                      trailing: Row(
+                        children: <Widget>[
+                          Text(
+                            'USD',
+                            style: TextStyle(color: white.withOpacity(.7)),
+                          ),
+                          Icon(
+                            FontAwesomeIcons.chevronRight,
+                            color: white,
+                            size: fontSize(20),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: .3,
+                      color: white.withOpacity(.5),
+                      margin: EdgeInsets.symmetric(horizontal: width / 15),
+                    ),
+                    ListOption(
+                      height: height,
+                      width: width,
+                      leading: "About Us",
+                      onPressed: () {},
+                      trailing: Icon(
+                        FontAwesomeIcons.chevronRight,
+                        color: white,
+                        size: fontSize(20),
+                      ),
+                    ),
                   ],
                 ),
               ),
