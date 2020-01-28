@@ -28,7 +28,10 @@ class CustomAppBar extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.left,
-                style: TextStyle(color: white, fontSize: fontSize(25)),
+                style: TextStyle(
+                    color: white,
+                    fontSize: fontSize(25),
+                    fontWeight: FontWeight.w700),
               ),
               Container(
                 alignment: Alignment.centerRight,

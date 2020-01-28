@@ -118,7 +118,9 @@ class _DashboardPageState extends State<DashboardPage> {
                             Text(
                               "Transactions",
                               style: TextStyle(
-                                  color: white, fontSize: fontSize(25)),
+                                  color: white,
+                                  fontSize: fontSize(25),
+                                  fontWeight: FontWeight.w700),
                             ),
                             Padding(
                               padding: EdgeInsets.all(5.0),

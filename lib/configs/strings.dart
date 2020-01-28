@@ -48,3 +48,8 @@ List transactionLogs = [
     "timestamp": "16 jan 2020"
   }
 ];
+
+List currency = ["usd", "inr", "gbp", "kd", "omr"];
+String appName = "CryptoWallet";
+String bodyText =
+    "Gas free transaction solution\nand Cryptocurrency wallet with tons of features";

@@ -1,21 +1,33 @@
 PODS:
   - Flutter (1.0.0)
+  - flutter_statusbarcolor (0.0.1):
+    - Flutter
   - local_auth (0.0.1):
+    - Flutter
+  - qrscan (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - flutter_statusbarcolor (from `.symlinks/plugins/flutter_statusbarcolor/ios`)
   - local_auth (from `.symlinks/plugins/local_auth/ios`)
+  - qrscan (from `.symlinks/plugins/qrscan/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  flutter_statusbarcolor:
+    :path: ".symlinks/plugins/flutter_statusbarcolor/ios"
   local_auth:
     :path: ".symlinks/plugins/local_auth/ios"
+  qrscan:
+    :path: ".symlinks/plugins/qrscan/ios"
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_statusbarcolor: 8afb1071ed8c58be929f1e32b36c629771fd2259
   local_auth: 2571c49920ae469f46d5557435fad8fa473a5e88
+  qrscan: 42f49ba37d3c423a3b140434003e821135cfc4c3
 
 PODFILE CHECKSUM: 083258d7f5e80b42ea9bfee905fe93049bc04c64
 

@@ -13,7 +13,9 @@ class LockButton extends StatelessWidget {
     }
 
     return Container(
-      color: Colors.transparent,
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+      ),
       alignment: Alignment.center,
       child: Text(
         title,

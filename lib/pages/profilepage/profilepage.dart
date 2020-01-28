@@ -4,6 +4,8 @@ import 'package:cryptowallet/components/profilepage/userprofile.dart';
 import 'package:cryptowallet/configs/colors.dart';
 import 'package:cryptowallet/configs/dimensions.dart';
 import 'package:cryptowallet/configs/navigation.dart';
+import 'package:cryptowallet/pages/profilepage/profilepagepages/selectcurrency.dart';
+import 'package:cryptowallet/pages/profilepage/profilepagepages/userqr.dart';
 import 'package:cryptowallet/pages/screenlock/screenlock.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +35,9 @@ class _ProfilePageState extends State<ProfilePage> {
             CustomAppBar(
               title: "Profile & Settings",
               icon: FontAwesomeIcons.qrcode,
-              onPressed: () {},
+              onPressed: () {
+                navigate(context, UserQRPage());
+              },
             ),
             Expanded(
               child: Container(
@@ -99,7 +103,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: height,
                       width: width,
                       leading: "Base Currency",
-                      onPressed: () {},
+                      onPressed: () {
+                        navigate(context, SelectCurrencyPage());
+                      },
                       trailing: Row(
                         children: <Widget>[
                           Text(

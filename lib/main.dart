@@ -1,5 +1,7 @@
 import 'package:cryptowallet/pages/dashboard.dart';
+import 'package:cryptowallet/pages/onboarding/onboardingpage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,8 +24,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  theme() {
+    FlutterStatusbarcolor.setNavigationBarWhiteForeground(true);
+    FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DashboardPage();
+    theme();
+    return OnBoardingPage();
   }
 }

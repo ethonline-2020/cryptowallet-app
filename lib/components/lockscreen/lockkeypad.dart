@@ -15,14 +15,14 @@ class LockKeypad extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
+                  child: InkWell(
                       onTap: () {
                         onPressed("1");
                       },
                       child: LockButton(title: '1')),
                 ),
                 Expanded(
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       onPressed("2");
                     },
@@ -30,7 +30,7 @@ class LockKeypad extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       onPressed("3");
                     },
@@ -44,7 +44,7 @@ class LockKeypad extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       onPressed("4");
                     },
@@ -52,7 +52,7 @@ class LockKeypad extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       onPressed("5");
                     },
@@ -60,7 +60,7 @@ class LockKeypad extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       onPressed("6");
                     },
@@ -74,7 +74,7 @@ class LockKeypad extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       onPressed("7");
                     },
@@ -82,7 +82,7 @@ class LockKeypad extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       onPressed("8");
                     },
@@ -90,7 +90,7 @@ class LockKeypad extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       onPressed("9");
                     },
@@ -104,10 +104,16 @@ class LockKeypad extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Container(),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Icon(
+                      FontAwesomeIcons.fingerprint,
+                      color: white,
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       onPressed("0");
                     },
@@ -115,7 +121,7 @@ class LockKeypad extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       onPressed("back");
                     },
