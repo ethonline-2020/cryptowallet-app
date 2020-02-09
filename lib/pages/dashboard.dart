@@ -1,19 +1,47 @@
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:cryptowallet/appbars/appbar.dart';
 import 'package:cryptowallet/configs/colors.dart';
 import 'package:cryptowallet/configs/dimensions.dart';
 import 'package:cryptowallet/configs/navigation.dart';
 import 'package:cryptowallet/configs/strings.dart';
 import 'package:cryptowallet/pages/profilepage/profilepage.dart';
+import 'package:cryptowallet/pages/profilepage/profilepagepages/userqr.dart';
+import 'package:cryptowallet/pages/send/sendmoney.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
+import 'package:flutter/services.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardPageState extends State<DashboardPage>
+    with SingleTickerProviderStateMixin {
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  TextEditingController _outputController = TextEditingController();
+  String barcode = "";
+
+  Future scan() async {
+    try {
+      String barcode = await BarcodeScanner.scan();
+      setState(() => this.barcode = barcode);
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          this.barcode = 'The user did not grant the camera permission!';
+        });
+      } else {
+        setState(() => this.barcode = 'Unknown error: $e');
+      }
+    } on FormatException {
+      setState(() => this.barcode =
+          'null (User returned using the "back"-button before scanning anything. Result)');
+    } catch (e) {
+      setState(() => this.barcode = 'Unknown error: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,178 +51,96 @@ class _DashboardPageState extends State<DashboardPage> {
       return size * width / 414;
     }
 
-    return Scaffold(
-      key: _scaffoldKey,
-      body: Container(
-        color: darkblue,
-        child: Stack(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.topCenter,
-              child: SafeArea(
-                child: Container(
-                  height: height / 3,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(top: height / 40),
-                        child: Column(
+    return Container(
+      color: darkblue,
+      child: Column(
+        children: <Widget>[
+          CustomAppBar(
+            title: "CryptoWallet",
+            icon: FontAwesomeIcons.userAlt,
+            onPressed: () {
+              navigate(context, ProfilePage());
+            },
+          ),
+          Expanded(
+            flex: 3,
+            child: Container(
+              color: lightblue,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: height / 40),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "\$5,610.00",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              color: white,
+                              fontSize: fontSize(40),
+                              fontWeight: FontWeight.w700),
+                        ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
-                              "\$5,610.00",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  color: white,
-                                  fontSize: fontSize(40),
-                                  fontWeight: FontWeight.w700),
-                            ),
-                            Padding(padding: EdgeInsets.all(10)),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      border:
-                                          Border.all(width: 1, color: white)),
-                                  child: Text(
-                                    "Send",
-                                    style: TextStyle(
-                                        color: white,
-                                        fontSize: fontSize(20),
-                                        fontWeight: FontWeight.w100),
-                                  ),
+                            GestureDetector(
+                              onTap: () {
+                                scan();
+                                // navigate(context, SendMoneyPage());
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    border: Border.all(width: 1, color: white)),
+                                child: Text(
+                                  "Send",
+                                  style: TextStyle(
+                                      color: white,
+                                      fontSize: fontSize(20),
+                                      fontWeight: FontWeight.w100),
                                 ),
-                                Padding(padding: EdgeInsets.all(6)),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      border:
-                                          Border.all(width: 1, color: white)),
-                                  child: Text(
-                                    "Recieve",
-                                    style: TextStyle(
-                                        color: white,
-                                        fontSize: fontSize(20),
-                                        fontWeight: FontWeight.w100),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SingleChildScrollView(
-              child: Container(
-                  margin: EdgeInsets.only(top: height / 2.5),
-                  decoration: BoxDecoration(
-                      color: lightblue,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(width / 10),
-                          topRight: Radius.circular(width / 10))),
-                  child: ListView(
-                    physics: ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: width / 15, vertical: height / 100),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              "Transactions",
-                              style: TextStyle(
-                                  color: white,
-                                  fontSize: fontSize(25),
-                                  fontWeight: FontWeight.w700),
+                              ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: Icon(
-                                FontAwesomeIcons.chevronDown,
-                                color: white,
-                                size: fontSize(15),
+                            Padding(padding: EdgeInsets.all(6)),
+                            GestureDetector(
+                              onTap: () {
+                                navigate(context, UserQRPage());
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    border: Border.all(width: 1, color: white)),
+                                child: Text(
+                                  "Recieve",
+                                  style: TextStyle(
+                                      color: white,
+                                      fontSize: fontSize(20),
+                                      fontWeight: FontWeight.w100),
+                                ),
                               ),
                             )
                           ],
-                        ),
-                      ),
-                      ListView.builder(
-                        physics: ClampingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: transactionLogs.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            height: height / 7,
-                            padding:
-                                EdgeInsets.symmetric(horizontal: width / 15),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(transactionLogs[index]['title'],
-                                        style: TextStyle(
-                                            color: white,
-                                            fontSize: fontSize(18))),
-                                    Text(transactionLogs[index]['subtitle'],
-                                        style: TextStyle(
-                                            color: white,
-                                            fontSize: fontSize(18)))
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(transactionLogs[index]['amount'],
-                                        style: TextStyle(
-                                            color: transactionLogs[index]
-                                                        ['amount']
-                                                    .contains("-")
-                                                ? neonred
-                                                : neongreen,
-                                            fontSize: fontSize(18))),
-                                    Text(transactionLogs[index]['timestamp'],
-                                        style: TextStyle(
-                                            color: white,
-                                            fontSize: fontSize(18)))
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  )),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-            CustomAppBar(
-              title: "CryptoWallet",
-              icon: FontAwesomeIcons.userAlt,
-              onPressed: () {
-                navigate(context, ProfilePage());
-              },
-            ),
-          ],
-        ),
+          ),
+          Expanded(
+            flex: 7,
+            child: Container(),
+          )
+        ],
       ),
     );
   }

@@ -1,33 +1,76 @@
 PODS:
+  - barcode_scan (0.0.1):
+    - Flutter
+    - MTBBarcodeScanner
   - Flutter (1.0.0)
   - flutter_statusbarcolor (0.0.1):
     - Flutter
   - local_auth (0.0.1):
     - Flutter
+  - MTBBarcodeScanner (5.0.11)
+  - path_provider (0.0.1):
+    - Flutter
   - qrscan (0.0.1):
+    - Flutter
+  - shared_preferences (0.0.1):
+    - Flutter
+  - shared_preferences_macos (0.0.1):
+    - Flutter
+  - shared_preferences_web (0.0.1):
+    - Flutter
+  - social_share (0.0.1):
     - Flutter
 
 DEPENDENCIES:
+  - barcode_scan (from `.symlinks/plugins/barcode_scan/ios`)
   - Flutter (from `Flutter`)
   - flutter_statusbarcolor (from `.symlinks/plugins/flutter_statusbarcolor/ios`)
   - local_auth (from `.symlinks/plugins/local_auth/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - qrscan (from `.symlinks/plugins/qrscan/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
+  - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
+  - social_share (from `.symlinks/plugins/social_share/ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - MTBBarcodeScanner
 
 EXTERNAL SOURCES:
+  barcode_scan:
+    :path: ".symlinks/plugins/barcode_scan/ios"
   Flutter:
     :path: Flutter
   flutter_statusbarcolor:
     :path: ".symlinks/plugins/flutter_statusbarcolor/ios"
   local_auth:
     :path: ".symlinks/plugins/local_auth/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
   qrscan:
     :path: ".symlinks/plugins/qrscan/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+  shared_preferences_macos:
+    :path: ".symlinks/plugins/shared_preferences_macos/ios"
+  shared_preferences_web:
+    :path: ".symlinks/plugins/shared_preferences_web/ios"
+  social_share:
+    :path: ".symlinks/plugins/social_share/ios"
 
 SPEC CHECKSUMS:
+  barcode_scan: 33f586d02270046fc6559135038b34b5754eaa4f
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_statusbarcolor: 8afb1071ed8c58be929f1e32b36c629771fd2259
   local_auth: 2571c49920ae469f46d5557435fad8fa473a5e88
+  MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
+  path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
   qrscan: 42f49ba37d3c423a3b140434003e821135cfc4c3
+  shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
+  shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
+  shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
+  social_share: 702a5e3842addd22db515aa9e1e00a4b80a0296d
 
 PODFILE CHECKSUM: 083258d7f5e80b42ea9bfee905fe93049bc04c64
 

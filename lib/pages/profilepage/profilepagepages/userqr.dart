@@ -1,8 +1,12 @@
 import 'package:cryptowallet/appbars/appbar.dart';
+import 'package:cryptowallet/buttons/button.dart';
 import 'package:cryptowallet/configs/colors.dart';
 import 'package:cryptowallet/configs/dimensions.dart';
+import 'package:cryptowallet/configs/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:social_share/social_share.dart';
 
 class UserQRPage extends StatefulWidget {
   @override
@@ -10,6 +14,7 @@ class UserQRPage extends StatefulWidget {
 }
 
 class _UserQRPageState extends State<UserQRPage> {
+  ScreenshotController _screenshotController = ScreenshotController();
   @override
   Widget build(BuildContext context) {
     double height = getheight(context);
@@ -37,17 +42,21 @@ class _UserQRPageState extends State<UserQRPage> {
                       decoration: BoxDecoration(
                           color: white,
                           borderRadius: BorderRadius.circular(width / 30)),
-                      child: QrImage(
-                        data: "1234567890",
-                        version: QrVersions.auto,
-                        foregroundColor: black,
-                        size: 200.0,
+                      child: Screenshot(
+                        controller: _screenshotController,
+                        child: QrImage(
+                          data: "1234567890",
+                          version: QrVersions.auto,
+                          foregroundColor: black,
+                          size: 200.0,
+                        ),
                       ),
                     ),
                   ),
                 ),
                 Expanded(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Container(
                         padding: EdgeInsets.symmetric(
@@ -62,6 +71,17 @@ class _UserQRPageState extends State<UserQRPage> {
                             fontSize: fontSize(20),
                           ),
                         ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                      ),
+                      Button(
+                        title: "Share",
+                        onPressed: () {
+                          _screenshotController.capture().then((image) {
+                            SocialShare.shareOptions("", imagePath: image.path);
+                          });
+                        },
                       ),
                     ],
                   ),

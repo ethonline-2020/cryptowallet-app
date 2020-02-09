@@ -2,8 +2,12 @@ import 'package:cryptowallet/appbars/appbar.dart';
 import 'package:cryptowallet/components/lockscreen/lockkeypad.dart';
 import 'package:cryptowallet/configs/colors.dart';
 import 'package:cryptowallet/configs/dimensions.dart';
+import 'package:cryptowallet/configs/navigation.dart';
+import 'package:cryptowallet/pages/homepage.dart';
+import 'package:cryptowallet/services/localauthservice.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:local_auth/local_auth.dart';
 
 class ScreenLockPage extends StatefulWidget {
   @override
@@ -13,6 +17,27 @@ class ScreenLockPage extends StatefulWidget {
 class _ScreenLockPageState extends State<ScreenLockPage> {
   onKeyPressed(value) {
     print(value);
+  }
+
+  LocalAuthentication _localAuthentication = LocalAuthentication();
+  auth() {
+    checkBiometrics(_localAuthentication).then((hasBiometrics) {
+      if (hasBiometrics) {
+        getAvailableBiometrics(_localAuthentication).then((value) {
+          authenticate(_localAuthentication).then((authenticated) {
+            if (authenticated) {
+              navigate(context, HomePage());
+            }
+          });
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    auth();
   }
 
   @override

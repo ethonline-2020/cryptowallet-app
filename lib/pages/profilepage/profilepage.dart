@@ -7,6 +7,7 @@ import 'package:cryptowallet/configs/navigation.dart';
 import 'package:cryptowallet/pages/profilepage/profilepagepages/selectcurrency.dart';
 import 'package:cryptowallet/pages/profilepage/profilepagepages/userqr.dart';
 import 'package:cryptowallet/pages/screenlock/screenlock.dart';
+import 'package:cryptowallet/services/sharedprefrencesservices.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,6 +20,21 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool _isDark = true;
   bool _lock = false;
+  @override
+  void initState() {
+    super.initState();
+    isAppLockEnabled().then((value) {
+      print(value);
+      if (value == null) {
+        enableAppLock(false);
+      } else {
+        setState(() {
+          _lock = value;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = getheight(context);
@@ -91,6 +107,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           setState(() {
                             _lock = !_lock;
                           });
+                          enableAppLock(_lock);
+                          // print(_lock);
                         },
                       ),
                     ),
